@@ -39,6 +39,8 @@ public class ClientFragment extends Fragment implements OnMapReadyCallback {
             Log.i(TAG,"getMap -> "+mapFragment);
         });
 
+        Log.i(TAG,"map fragment value -> "+clientViewModel.getMapFragmentValue());
+
         if (mapFragment == null) {
             mapFragment = SupportMapFragment.newInstance();
             mapFragment.getMapAsync(this);
@@ -65,6 +67,6 @@ public class ClientFragment extends Fragment implements OnMapReadyCallback {
         // Add a marker in cyber hub and move the camera
         LatLng sydney = new LatLng(28.4622138,77.1004585);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Cyber hub"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,12));
     }
 }
