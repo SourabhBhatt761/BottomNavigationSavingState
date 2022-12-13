@@ -1,6 +1,7 @@
 package com.example.bottomnavigationsavingstate.ui.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +16,24 @@ import com.example.bottomnavigationsavingstate.databinding.FragmentDashboardBind
 public class TaskFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
+    private static final String TAG = "TaskFragment";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        TaskViewModel taskViewModel =
+                new ViewModelProvider(this).get(TaskViewModel.class);
 
+        Log.i(TAG,"onCreateView");
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        taskViewModel.setText();
+
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        taskViewModel.getText().observe(getViewLifecycleOwner(), t->{
+            textView.setText(t);
+            Log.i(TAG,"getting text");
+        });
         return root;
     }
 
@@ -33,5 +41,6 @@ public class TaskFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        Log.i(TAG,"onDestroyView");
     }
 }
