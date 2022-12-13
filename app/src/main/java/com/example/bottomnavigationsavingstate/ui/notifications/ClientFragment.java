@@ -42,7 +42,6 @@ public class ClientFragment extends Fragment implements OnMapReadyCallback {
         if (mapFragment == null) {
             mapFragment = SupportMapFragment.newInstance();
             mapFragment.getMapAsync(this);
-            mapFragment.setRetainInstance(true);
             getChildFragmentManager().beginTransaction().replace(R.id.client_dashboardMap, mapFragment).commit();
             clientViewModel.setMapFragment(mapFragment);
             Log.i(TAG,"setMap -> "+mapFragment);
